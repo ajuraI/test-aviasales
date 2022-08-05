@@ -1,0 +1,50 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: #f3f7fa;
+	font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	width: 1000px;
+	margin: 0 auto;
+	flex-direction: column;
+}
+
+header {
+	display: flex;
+	justify-content:center;
+	height: 90xp;
+	margin-bottom: 50px;
+}
+
+.logo {
+	margin-top: 40px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.container_tickets{
+	display: flex;
+	flex-direction: column;
+}
+
+.preloader_container {
+	display: flex;
+	align-items: center;
+	flex-direction: column-reverse;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	justify-content: center;
+}
+
