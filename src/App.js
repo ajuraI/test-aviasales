@@ -27,7 +27,7 @@ function App() {
       <header><img src={logo} className='logo'></img></header>
       <div className="container">
         <div>
-          <Filter setCurrensy={setCurrensy}/>
+          <Filter setCurrensy={setCurrensy} setTickets={setTickets}/>
         </div>
       {ticketError &&
         <Alert severity="error">Произошла ошибка ${ticketError}</Alert>

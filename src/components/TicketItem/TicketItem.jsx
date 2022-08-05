@@ -9,9 +9,9 @@ function TicketItem(props) {
       case "rub":
         return `${price} ₽`;
       case "usd":
-        return `${Math.floor(price / 30)} $`;
+        return `${Math.floor(price / 60)} $`;
       case "eur":
-        return `${Math.floor(price / 70)} €`;
+        return `${Math.floor(price / 65)} €`;
       default:
         return `${price} ₽`;
     }

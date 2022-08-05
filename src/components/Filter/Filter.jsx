@@ -6,32 +6,31 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
 
-function Filter({setCurrensy}) {
+function Filter({setCurrensy, setTickets}) {
 	const [activeButton, setActiveButton] = useState('')
 	
-	const handleClickRub = (e) => {
-		setActiveButton(e.target.id);
-		setCurrensy("rub")
-  };
-
-	const handleClickUsd= (e) => {
-		setActiveButton(e.target.id);
-		setCurrensy("usd")
-  };
-
-	const handleClickUEur= (e) => {
-		setActiveButton(e.target.id);
-		setCurrensy("eur")
-  };
+		const changeHandler = (event) => {
+		setActiveButton(event.target.id);
+		switch (event.target.id) {
+			case 'rub':
+				return setCurrensy('rub')
+			case 'usd':
+				return setCurrensy('usd')
+			case 'eur':
+				return setCurrensy('eur')
+			default:
+				return setCurrensy('rub')
+		}
+	};
 
 	return (
 		<div className='filter'>
 			<div className='filter_currencies'>
 				<h3>ВАЛЮТА</h3>
 				<div className='currenciesButtons'>
-					<button id='rub' className={activeButton === 'rub' ? 'button active' : 'button'} onClick={handleClickRub}>RUB</button>
-					<button id='usd' className={activeButton === 'usd' ? 'button active' : 'button'} onClick={handleClickUsd}>USD</button>
-					<button id='eur' className={activeButton === 'eur' ? 'button active' : 'button'} onClick={handleClickUEur}>EUR</button>
+					<button id='rub' className={activeButton === 'rub' ? 'button active' : 'button'} onClick={changeHandler}>RUB</button>
+					<button id='usd' className={activeButton === 'usd' ? 'button active' : 'button'} onClick={changeHandler}>USD</button>
+					<button id='eur' className={activeButton === 'eur' ? 'button active' : 'button'} onClick={changeHandler}>EUR</button>
 				</div>
 			</div>
 			<div className='filter_check'>
@@ -70,18 +69,6 @@ function Filter({setCurrensy}) {
 		</div>
 	)
 }
-	// const changeHandler = (event) => {
-	// 	setActiveButton(event.target.id);
-	// 	switch (event.target.id) {
-	// 		case 'rub':
-	// 			return setCurrensy('rub')
-	// 		case 'usd':
-	// 			return setCurrensy('usd')
-	// 		case 'eur':
-	// 			return setCurrensy('eur')
-	// 		default:
-	// 			return setCurrensy('rub')
-	// 	}
-	// };
+
 
 export default Filter

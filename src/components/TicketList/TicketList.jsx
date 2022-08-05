@@ -2,7 +2,7 @@ import React from 'react'
 import TicketItem from '../TicketItem/TicketItem'
 import shortid from 'shortid'
 
-function TicketList({tickets}, currency) {
+function TicketList({tickets, currency}) {
 	return (
 		<div>
 			<div className="container_tickets">
