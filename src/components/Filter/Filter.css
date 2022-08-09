@@ -1,9 +1,12 @@
 .filter, .filter_currencies, .filter_check {
 	display: flex;
 	flex-direction: column;
+	height: fit-content;
 }
 
 .filter {
+	position: sticky;
+	top: 25px;;
 	min-width: 250px;
 	background-color: #fff;
 	border-radius: 10px;

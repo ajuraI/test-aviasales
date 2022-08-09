@@ -26,11 +26,9 @@ function App() {
     <div className="wrapper">
       <header><img src={logo} className='logo'></img></header>
       <div className="container">
-        <div>
-          <Filter setCurrensy={setCurrensy} setTickets={setTickets}/>
-        </div>
+          <Filter setCurrensy={setCurrensy} tickets={tickets}/>
       {ticketError &&
-        <Alert severity="error">Произошла ошибка ${ticketError}</Alert>
+        <Alert severity="error">Произошла ошибка <b>{ticketError}</b></Alert>
       }
       {isTicketLoading
         ? <div className="preloader_container"><Preloader/></div>
