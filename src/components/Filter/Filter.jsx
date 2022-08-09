@@ -7,21 +7,51 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
 
 function Filter({setCurrensy, tickets}) {
+	const [update, setUpdate] = useState([tickets])
 	const [activeButton, setActiveButton] = useState('')
 	const [defaultCheck, setDefaultCheck] = useState({
 		checkboxAll:true,
-		checkbox0:true,
-		checkbox1:true,
-		checkbox2:true,
-		checkbox3:true,
+		checkbox0:false,
+		checkbox1:false,
+		checkbox2:false,
+		checkbox3:false,
 	})
 
-	// const sortedPosts = useMemo(() => {
-  //   if (sort) {
-  //     return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
-  //   } 
-  //   return posts;
-  // }, [sort, posts])
+	const checkedFilterAll = (e) => {
+		const checked = e.target.checked;
+
+		if (checked) {
+			setDefaultCheck({
+        checkboxAll: true		
+      })
+		} else {
+			setDefaultCheck({
+        checkboxAll: false,	
+      })
+		}
+	}	
+
+	const checkedFilter = (e) => {
+		const value = e.target.value;
+    const checked = e.target.checked;
+    const name = e.target.name;
+		const data = tickets;
+
+		setDefaultCheck({[name] : checked})
+		if (checked){
+			const filterData = data.filter(item => item.stops === +value);
+      filterData.forEach(item => update.push(item));
+      setUpdate({
+        update: update
+      });
+		}else {
+			const filterData = data.filter(item => item.stops !== +value);
+      setUpdate({
+        update: filterData
+      });
+		}
+	}
+
 	
 	const changeHandler = (event) => {
 		setActiveButton(event.target.id);
@@ -55,8 +85,8 @@ function Filter({setCurrensy, tickets}) {
 							id='all'
 							checked={defaultCheck.checkboxAll}
 							name="checkboxAll"
-							value="All"
-							onChange={() => setDefaultCheck(!defaultCheck.checkboxAll)}						
+							value='all'
+							onChange={checkedFilterAll}						
 						/>}
           label="Все"
 					labelPlacement="end"
@@ -67,8 +97,8 @@ function Filter({setCurrensy, tickets}) {
 							id='none'
 							checked={defaultCheck.checkbox0}
 							name="checkbox0"
-							value="0"
-							
+							value='0'
+							onChange={checkedFilter}
 						/>}
           label="Без пересадок"
           labelPlacement="end"
@@ -79,8 +109,8 @@ function Filter({setCurrensy, tickets}) {
 							id='one'
 							checked={defaultCheck.checkbox1}
 							name="checkbox1"
-							value="1"
-		
+							value='1'
+							onChange={checkedFilter}
 						/>}
           label="1 пересадка"
           labelPlacement="end"
@@ -91,8 +121,8 @@ function Filter({setCurrensy, tickets}) {
 							id='two'
 							checked={defaultCheck.checkbox2}
 							name="checkbox2"
-							value="2"
-												
+							value='2'
+							onChange={checkedFilter}				
 						/>}
           label="2 пересадки"
           labelPlacement="end"
@@ -100,19 +130,21 @@ function Filter({setCurrensy, tickets}) {
 				<FormControlLabel
           value="end"
           control = {<Checkbox 
-											id='three'
-											checked={defaultCheck.checkbox3}
-											name="checkbox3"
-											value="3"
-																				
-										/>}
+							id='three'
+							checked={defaultCheck.checkbox3}
+							name="checkbox3"
+							value='3'
+							onChange={checkedFilter}							
+						/>}
           label="3 пересадки"
           labelPlacement="end"
         />																				
 			</div>
 		</div>
 	)
-}
+	}
+
+
 
 
 export default Filter
