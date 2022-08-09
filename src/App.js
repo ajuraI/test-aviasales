@@ -8,10 +8,12 @@ import { useFetching } from './hooks/useFetching';
 import TicketService from './API/TicketService';
 import Preloader from './components/UI/preloader/Preloader';
 import Alert from '@mui/material/Alert';
+import { defaultTransferFilters } from './components/Filter/constants';
 
 function App() {
   const [tickets, setTickets] = useState([])
-  const [currency, setCurrensy] = useState('')
+  const [currency, setCurrensy] = useState('rub');
+  const [transferFilters, setTransferFilters] = useState(defaultTransferFilters);
 
   const [fetchTickets, isTicketLoading, ticketError] = useFetching (async () => {
     const tickets = await TicketService.getAll();
@@ -24,9 +26,15 @@ function App() {
 
   return (
     <div className="wrapper">
-      <header><img src={logo} className='logo'></img></header>
+      <header><img src={logo} className='logo' alt='logo'></img></header>
       <div className="container">
-          <Filter setCurrensy={setCurrensy} tickets={tickets}/>
+          <Filter 
+            transferFilters={transferFilters} 
+            setTransferFilters={setTransferFilters} 
+            setCurrensy={setCurrensy} 
+            tickets={tickets} 
+            currency={currency} 
+          />
       {ticketError &&
         <Alert severity="error">Произошла ошибка <b>{ticketError}</b></Alert>
       }
