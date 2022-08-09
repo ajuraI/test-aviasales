@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from "react";
 import './styles/App.css'
 import logo from './images/logo.png'
 import Filter from "./components/Filter/Filter";
@@ -15,9 +14,15 @@ function App() {
   const [currency, setCurrensy] = useState('rub');
   const [transferFilters, setTransferFilters] = useState(defaultTransferFilters);
 
+  const filteredTickets = useMemo(() => {
+    return tickets.filter((ticket) => {
+      return transferFilters[ticket.stops];
+    })
+  }, [tickets, transferFilters])
+
   const [fetchTickets, isTicketLoading, ticketError] = useFetching (async () => {
     const tickets = await TicketService.getAll();
-    setTickets(tickets)
+    setTickets(tickets);
   })
 
   useEffect(() => {
@@ -40,7 +45,7 @@ function App() {
       }
       {isTicketLoading
         ? <div className="preloader_container"><Preloader/></div>
-        : <TicketList tickets={tickets} currency={currency}/>
+        : <TicketList tickets={filteredTickets} currency={currency}/>
       }
       </div>
     </div>

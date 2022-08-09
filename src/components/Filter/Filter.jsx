@@ -1,17 +1,12 @@
-import React from 'react'
-import '../Filter/Filter.css'
+import React, { useState, useEffect } from 'react'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import '../Filter/Filter.css'
 import { defaultTransferFilters, emptyTransferFilters } from './constants';
 import { isAllTransferFilters } from "./utils";
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-
 
 function Filter({ setCurrensy, currency, transferFilters, setTransferFilters }) {
 	const [isAllChecked, setIsAllChecked] = useState(true);
-
 
 	useEffect(() => {
 		if (isAllTransferFilters(transferFilters)) {
